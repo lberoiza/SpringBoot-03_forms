@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="html://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<form th:action="@{/form}" method="post">
+	<div class="form-group">
+		<label for="username">Username</label>
+		<input type="text" name="username" id="username"/>
+	</div>
+	<div class="form-group">
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password"/>
+	</div>
+	<div class="form-group">
+		<label for="email">Email</label>
+		<input type="email" name="email" id="email"/>
+	</div>
+	<div class="form-group">
+		<input type="submit" value="Enviar"/>
+	</div>
+</form>
+</html>
