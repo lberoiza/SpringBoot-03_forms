@@ -5,12 +5,18 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.springboot.form.app.models.User;
 
 import jakarta.validation.Valid;
 
 @Controller
+//la anotacion @SessionAttributes mapea un objeto (en este caso user)
+//para que esté disponible entre requests.
+//de esta manera no se pierden los datos (id) del user.
+@SessionAttributes("user")
 public class FormController {
 
   @GetMapping("/form")
@@ -33,11 +39,12 @@ public class FormController {
 //  debe ser inyectado como segundo argumento del metodo, al lado del objeto con la anotacion
 //  @Valid.
   @PostMapping("/form")
-  public String processForm(@Valid User user,BindingResult result, Model model) {
+  public String processForm(@Valid User user,BindingResult result, Model model, SessionStatus status) {
+    model.addAttribute("title", "User creation");
     if (result.hasErrors())  return "form/show_form";
 
-    model.addAttribute("title", "User creation successful");
     model.addAttribute("user", user);
+    status.setComplete();
     return "form/show_result";
 
   }
