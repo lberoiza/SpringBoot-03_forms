@@ -19,6 +19,7 @@ public class FormController {
   @GetMapping("/form")
   public String showForm(Model model) {
     model.addAttribute("title", "Create new User");
+    model.addAttribute("user", new User());
     return "form/show_form";
 
   }
