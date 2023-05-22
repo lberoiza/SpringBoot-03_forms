@@ -1,9 +1,10 @@
 package com.springboot.form.app.models;
 
+import com.springboot.form.app.annotations.validations.PasswordRegEx;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 // Al Poner la clase User como primer argumento del metodo "processForm"
@@ -28,7 +29,8 @@ public class User {
   private String username;
 
   @NotBlank
-  @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[&\\-#<>_.]).{5,10}$")
+  // Anotacion personalizada para validar password
+  @PasswordRegEx
   private String password;
 
   @NotBlank
