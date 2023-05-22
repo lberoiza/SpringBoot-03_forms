@@ -1,6 +1,7 @@
 package com.springboot.form.app.models;
 
 import com.springboot.form.app.annotations.validations.PasswordRegEx;
+import com.springboot.form.app.annotations.validations.RequiredField;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -17,15 +18,15 @@ public class User {
 // debe persistir si se cambian datos en el formulario
   private String id;
 
-  @NotBlank
+  @RequiredField
   @Size(min = 2, max = 15)
   private String name;
 
-  @NotBlank
+  @RequiredField
   @Size(min = 2, max = 15)
   private String surname;
 
-  @NotEmpty
+  @RequiredField
   private String username;
 
   @NotBlank
@@ -33,7 +34,7 @@ public class User {
   @PasswordRegEx
   private String password;
 
-  @NotBlank
+  @RequiredField
   @Email
   private String email;
 
