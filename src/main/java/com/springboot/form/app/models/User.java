@@ -2,6 +2,7 @@ package com.springboot.form.app.models;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 // Al Poner la clase User como primer argumento del metodo "processForm"
 // puede mapear los datos del formulario a los campos de la clase
@@ -23,6 +24,7 @@ public class User {
   private String username;
 
   @NotEmpty
+  @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[&\\-#<>_.]).{5,10}$")
   private String password;
 
   @NotEmpty
