@@ -1,5 +1,6 @@
 package com.springboot.form.app.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.springboot.form.app.models.User;
+import com.springboot.form.app.validations.UserValidator;
 
 import jakarta.validation.Valid;
 
@@ -18,6 +20,11 @@ import jakarta.validation.Valid;
 //de esta manera no se pierden los datos (id) del user.
 @SessionAttributes("user")
 public class FormController {
+  
+  
+  @Autowired
+  private UserValidator userValidator;
+  
 
   @GetMapping("/form")
   public String showForm(Model model) {
@@ -41,6 +48,8 @@ public class FormController {
   @PostMapping("/form")
   public String processForm(@Valid User user,BindingResult result, Model model, SessionStatus status) {
     model.addAttribute("title", "User creation");
+    
+    userValidator.validate(user, result);
     if (result.hasErrors())  return "form/show_form";
 
     model.addAttribute("user", user);
