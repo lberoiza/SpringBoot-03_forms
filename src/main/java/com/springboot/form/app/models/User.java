@@ -9,6 +9,16 @@ import jakarta.validation.constraints.NotEmpty;
 // del formulario.
 public class User {
 
+// Identificador de usuario, no debe ser modificado
+// debe persistir si se cambian datos en el formulario
+  private String id;
+
+  @NotEmpty
+  private String name;
+
+  @NotEmpty
+  private String surname;
+
   @NotEmpty
   private String username;
 
@@ -25,6 +35,30 @@ public class User {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String nombre) {
+    this.name = nombre;
+  }
+
+  public String getSurname() {
+    return surname;
+  }
+
+  public void setSurname(String apellido) {
+    this.surname = apellido;
   }
 
   public String getPassword() {
