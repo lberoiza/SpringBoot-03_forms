@@ -6,27 +6,26 @@
 </head>
 
 <h3 th:text="${title}"></h3>
-<form th:action="@{/form}" method="post">
+<form th:action="@{/form}" th:object=${user} method="post">
 	<div class="form-group">
-		<label for="username">Username</label> <input type="text"
-			name="username" id="username" th:value=${user.username}/>
-		<div th:if="${error != null && error.containsKey('username')}"
-			th:text="${error.username}" style="color: red"></div>
-	</div>
-	<div class="form-group">
-		<label for="password">Password</label> <input type="password"
-			name="password" id="password"  th:value=${user.password}/>
-		<div th:if="${error != null && error.containsKey('password')}"
-			th:text="${error.password}" style="color: red"></div>
-	</div>
-	<div class="form-group">
-		<label for="email">Email</label> <input type="email" name="email"
-			id="email"  th:value=${user.email}/>
-		<div th:if="${error != null && error.containsKey('email')}"
-			th:text="${error.email}" style="color: red"></div>
-	</div>
-	<div class="form-group">
-		<input type="submit" value="Enviar" />
-	</div>
+		<label for="username">Username</label> <br /> <input type="text"
+			id="username" th:field=*{username} />
+		<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+			style="color: red"></div>
+		<div class="form-group">
+			<label for="password">Password</label> <br /> <input type="password"
+				id="password" th:field=*{password} />
+			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+				style="color: red"></div>
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label> <br /> <input type="email"
+				id="email" th:field=*{email} />
+			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+				style="color: red"></div>
+		</div>
+		<div class="form-group">
+			<input type="submit" value="Enviar" />
+		</div>
 </form>
 </html>

@@ -1,8 +1,5 @@
 package com.springboot.form.app.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,16 +30,7 @@ public class FormController {
 //  @Valid.
   @PostMapping("/form")
   public String processForm(@Valid User user,BindingResult result, Model model) {
-
-    if (result.hasErrors()) {
-      model.addAttribute("title", "User creation failed");
-      Map<String, String> errors = new HashMap<>();
-      result.getFieldErrors().forEach(field -> {
-        errors.put(field.getField(), String.format("The Field '%s' has errors: %s", field.getField(), field.getDefaultMessage()));
-      });
-      model.addAttribute("error", errors);
-      return "form/show_form";
-    }
+    if (result.hasErrors())  return "form/show_form";
 
     model.addAttribute("title", "User creation successful");
     model.addAttribute("user", user);
