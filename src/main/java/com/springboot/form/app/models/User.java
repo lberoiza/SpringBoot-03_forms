@@ -1,8 +1,10 @@
 package com.springboot.form.app.models;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 // Al Poner la clase User como primer argumento del metodo "processForm"
 // puede mapear los datos del formulario a los campos de la clase
@@ -14,20 +16,22 @@ public class User {
 // debe persistir si se cambian datos en el formulario
   private String id;
 
-  @NotEmpty
+  @NotBlank
+  @Size(min = 2, max = 15)
   private String name;
 
-  @NotEmpty
+  @NotBlank
+  @Size(min = 2, max = 15)
   private String surname;
 
   @NotEmpty
   private String username;
 
-  @NotEmpty
+  @NotBlank
   @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[&\\-#<>_.]).{5,10}$")
   private String password;
 
-  @NotEmpty
+  @NotBlank
   @Email
   private String email;
 
