@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -20,11 +22,17 @@ import jakarta.validation.Valid;
 //de esta manera no se pierden los datos (id) del user.
 @SessionAttributes("user")
 public class FormController {
-  
-  
+
   @Autowired
   private UserValidator userValidator;
-  
+
+  @InitBinder
+  public void initBinder(WebDataBinder binder) {
+    // agrega un nuevo validador al stack de validadores que hay
+    // tambien hay un metodo setValidaror, pero ese reemplaza
+    // el validador por defecto y solo agrega el validador personalizado
+    binder.addValidators(userValidator);
+  }
 
   @GetMapping("/form")
   public String showForm(Model model) {
@@ -46,11 +54,11 @@ public class FormController {
 //  debe ser inyectado como segundo argumento del metodo, al lado del objeto con la anotacion
 //  @Valid.
   @PostMapping("/form")
-  public String processForm(@Valid User user,BindingResult result, Model model, SessionStatus status) {
+  public String processForm(@Valid User user, BindingResult result, Model model, SessionStatus status) {
     model.addAttribute("title", "User creation");
-    
-    userValidator.validate(user, result);
-    if (result.hasErrors())  return "form/show_form";
+
+    if (result.hasErrors())
+      return "form/show_form";
 
     model.addAttribute("user", user);
     status.setComplete();
