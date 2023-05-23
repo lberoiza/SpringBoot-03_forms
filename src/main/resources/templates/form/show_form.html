@@ -58,6 +58,16 @@
 	</div>
 
 	<div class="form-group">
+		<label for="country">Date of Birthday</label> <br />
+		 <select id="country" th:field=*{country}>
+		 <option value="">--Select Country--</option>
+		 <option th:each="country: ${countries}" th:text=${country} th:value=${country}></option>
+		</select>
+		<div th:if="${#fields.hasErrors('country')}" th:errors="*{country}"
+			style="color: red"></div>
+	</div>
+
+	<div class="form-group">
 		<input type="submit" value="Enviar" />
 	</div>
 </form>

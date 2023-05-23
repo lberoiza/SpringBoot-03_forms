@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -57,6 +58,17 @@ public class User {
   // este formato es enviado por el Datepicker de HTML5
 //  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date birthdayDate;
+
+  @NotEmpty
+  private String country;
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
+  }
 
   public Date getBirthdayDate() {
     return birthdayDate;
