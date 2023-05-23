@@ -4,8 +4,11 @@ import com.springboot.form.app.annotations.validations.PasswordRegEx;
 import com.springboot.form.app.annotations.validations.RequiredField;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 // Al Poner la clase User como primer argumento del metodo "processForm"
@@ -37,6 +40,21 @@ public class User {
   @RequiredField
   @Email
   private String email;
+
+  // NotNull es solo para Tipos de Objetos
+  // Integer es un objeto
+  @NotNull
+  @Min(1)
+  @Max(9999)
+  private Integer count;
+
+  public Integer getCount() {
+    return count;
+  }
+
+  public void setCount(Integer count) {
+    this.count = count;
+  }
 
   public String getUsername() {
     return username;

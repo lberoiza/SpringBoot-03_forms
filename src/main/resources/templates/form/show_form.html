@@ -43,6 +43,13 @@
 			style="color: red"></div>
 	</div>
 
+  <div class="form-group">
+    <label for="count">CountNr.</label> <br /> <input type="text"
+      id="count" th:field=*{count} />
+    <div th:if="${#fields.hasErrors('count')}" th:errors="*{count}"
+      style="color: red"></div>
+  </div>
+
 	<div class="form-group">
 		<input type="submit" value="Enviar" />
 	</div>
