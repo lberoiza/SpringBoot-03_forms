@@ -1,5 +1,9 @@
 package com.springboot.form.app.models;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.springboot.form.app.annotations.validations.PasswordRegEx;
 import com.springboot.form.app.annotations.validations.RequiredField;
 
@@ -7,7 +11,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -47,6 +50,18 @@ public class User {
   @Min(1)
   @Max(9999)
   private Integer count;
+
+  @NotNull
+  @DateTimeFormat(pattern = "dd.MM.yyyy")
+  private Date birthdayDate;
+
+  public Date getBirthdayDate() {
+    return birthdayDate;
+  }
+
+  public void setBirthdayDate(Date birthdayDate) {
+    this.birthdayDate = birthdayDate;
+  }
 
   public Integer getCount() {
     return count;
