@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.springboot.form.app.editors.CapitalizeTextEditor;
 import com.springboot.form.app.models.User;
 import com.springboot.form.app.validations.UserValidator;
 
@@ -30,6 +31,9 @@ public class FormController {
   @Autowired
   private UserValidator userValidator;
 
+  @Autowired
+  private CapitalizeTextEditor capitalizeTextEditor;
+
   @InitBinder
   public void initBinder(WebDataBinder binder) {
     // agrega un nuevo validador al stack de validadores que hay
@@ -43,6 +47,9 @@ public class FormController {
     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormater, false));
     // Especifica el campo especifico en el se utilizará este editor
 //    binder.registerCustomEditor(Date.class, "birthdayDate", new CustomDateEditor(dateFormater, false));
+
+    binder.registerCustomEditor(String.class, "name", capitalizeTextEditor);
+    binder.registerCustomEditor(String.class, "surname", capitalizeTextEditor);
   }
 
   @GetMapping("/form")
