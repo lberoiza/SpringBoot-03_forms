@@ -1,6 +1,10 @@
 package com.springboot.form.app.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +36,13 @@ public class FormController {
     // tambien hay un metodo setValidaror, pero ese reemplaza
     // el validador por defecto y solo agrega el validador personalizado
     binder.addValidators(userValidator);
+
+    SimpleDateFormat dateFormater = new SimpleDateFormat("yyy-MM-dd");
+    // no debe ser indulgente, debe ser estricto en la conversion
+    dateFormater.setLenient(false);
+    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormater, false));
+    // Especifica el campo especifico en el se utilizará este editor
+//    binder.registerCustomEditor(Date.class, "birthdayDate", new CustomDateEditor(dateFormater, false));
   }
 
   @GetMapping("/form")

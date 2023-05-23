@@ -2,7 +2,7 @@ package com.springboot.form.app.models;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+//import org.springframework.format.annotation.DateTimeFormat;
 
 import com.springboot.form.app.annotations.validations.PasswordRegEx;
 import com.springboot.form.app.annotations.validations.RequiredField;
@@ -55,7 +55,7 @@ public class User {
   @NotNull
   @Past
   // este formato es enviado por el Datepicker de HTML5
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
+//  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date birthdayDate;
 
   public Date getBirthdayDate() {
