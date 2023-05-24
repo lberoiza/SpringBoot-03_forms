@@ -18,6 +18,7 @@
 	<li><span>CountNr: </span><span th:text="${user.count}"></span></li>
 	<li><span>Date of Birthday: </span><span th:text="${#dates.format(user.birthdayDate, 'dd.MM.yyyy')}"></span></li>
 	<li><span>Country: </span><span th:text="${user.country}"></span></li>
+	<li><span>Is User active: </span><span th:text="${user.active}"></span></li>
 </ul>
 
 <h4>Roles:</h4>

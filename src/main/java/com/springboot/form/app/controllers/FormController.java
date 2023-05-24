@@ -94,6 +94,7 @@ public class FormController {
     user.setId("15.570.392-k");
     user.setName("Peter");
     user.setSurname("Parker");
+    user.setActive(true);
     model.addAttribute("user", user);
     return "form/show_form";
 

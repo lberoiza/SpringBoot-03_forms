@@ -66,6 +66,16 @@ public class User {
   @NotEmpty
   private List<Role> roles;
 
+  private Boolean active;
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
+
   public List<Role> getRoles() {
     return roles;
   }
