@@ -1,11 +1,8 @@
 package com.springboot.form.app.controllers;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -22,9 +19,12 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.springboot.form.app.editors.CapitalizeTextEditor;
 import com.springboot.form.app.editors.CountryPropertyEditor;
+import com.springboot.form.app.editors.RolePropertyEditor;
 import com.springboot.form.app.models.Country;
+import com.springboot.form.app.models.Role;
 import com.springboot.form.app.models.User;
 import com.springboot.form.app.services.ICountryService;
+import com.springboot.form.app.services.IRoleService;
 import com.springboot.form.app.validations.UserValidator;
 
 import jakarta.validation.Valid;
@@ -41,12 +41,18 @@ public class FormController {
 
   @Autowired
   private CapitalizeTextEditor capitalizeTextEditor;
-
+  
   @Autowired
   private CountryPropertyEditor countryPropertyEditor;
 
   @Autowired
+  private RolePropertyEditor rolePropertyEditor;
+  
+  @Autowired
   private ICountryService<Country> countryService;
+
+  @Autowired
+  private IRoleService<Role> roleService;
 
   @InitBinder
   public void initBinder(WebDataBinder binder) {
@@ -67,10 +73,17 @@ public class FormController {
 
     // registrando Pais en el objeto User
     binder.registerCustomEditor(Country.class, "country", countryPropertyEditor);
+    
+    binder.registerCustomEditor(Role.class, "roles", rolePropertyEditor);
+  }
+  
+  @ModelAttribute("roles")
+  public List<Role> getRolles() {
+    return roleService.getList();
   }
 
   @ModelAttribute("countries")
-  public List<Country> getCountriesMap() {
+  public List<Country> getCountries() {
     return countryService.getList();
   }
 

@@ -1,6 +1,7 @@
 package com.springboot.form.app.models;
 
 import java.util.Date;
+import java.util.List;
 
 //import org.springframework.format.annotation.DateTimeFormat;
 
@@ -61,6 +62,17 @@ public class User {
 
   @NotNull
   private Country country;
+
+  @NotEmpty
+  private List<Role> roles;
+
+  public List<Role> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(List<Role> roles) {
+    this.roles = roles;
+  }
 
   public Country getCountry() {
     return country;

@@ -6,6 +6,8 @@
 </head>
 
 <h3 th:text="${title}"></h3>
+
+<h4>User:</h4>
 <ul>
 	<li><span>Id: </span><span th:text="${user.id}"></span></li>
 	<li><span>Name: </span><span th:text="${user.name}"></span></li>
@@ -16,5 +18,10 @@
 	<li><span>CountNr: </span><span th:text="${user.count}"></span></li>
 	<li><span>Date of Birthday: </span><span th:text="${#dates.format(user.birthdayDate, 'dd.MM.yyyy')}"></span></li>
 	<li><span>Country: </span><span th:text="${user.country}"></span></li>
+</ul>
+
+<h4>Roles:</h4>
+<ul>
+	<li th:each="role: ${user.roles}" th:text=${role}></li>
 </ul>
 </html>
