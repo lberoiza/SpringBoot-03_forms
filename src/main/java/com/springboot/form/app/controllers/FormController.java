@@ -101,6 +101,7 @@ public class FormController {
     user.setName("Peter");
     user.setSurname("Parker");
     user.setActive(true);
+    user.setHiddenValue("321456789");
     model.addAttribute("user", user);
     return "form/show_form";
 

@@ -71,6 +71,16 @@ public class User {
   @RequiredField
   private String gender;
 
+  private String hiddenValue;
+
+  public String getHiddenValue() {
+    return hiddenValue;
+  }
+
+  public void setHiddenValue(String hiddenValue) {
+    this.hiddenValue = hiddenValue;
+  }
+
   public String getGender() {
     return gender;
   }
