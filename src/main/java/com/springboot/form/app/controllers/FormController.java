@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -117,16 +118,25 @@ public class FormController {
 //  debe ser inyectado como segundo argumento del metodo, al lado del objeto con la anotacion
 //  @Valid.
   @PostMapping("/form")
-  public String processForm(@Valid User user, BindingResult result, Model model, SessionStatus status) {
-    model.addAttribute("title", "User creation");
-
-    if (result.hasErrors())
+  public String processForm(@Valid User user, BindingResult result, Model model) {
+    if (result.hasErrors()) {
+      model.addAttribute("title", "Error By User creation");
       return "form/show_form";
+    }
+    return "redirect:/show_user";
 
-    model.addAttribute("user", user);
+  }
+
+  @GetMapping("/show_user")
+  public String showUser(@SessionAttribute(name = "user", required = false) User user, Model model,
+      SessionStatus status) {
+
+    if (user == null)
+      return "redirect:/form";
+
+    model.addAttribute("title", "User created");
     status.setComplete();
     return "form/show_result";
-
   }
 
 }
