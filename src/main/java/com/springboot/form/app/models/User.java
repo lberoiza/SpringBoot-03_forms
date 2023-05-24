@@ -59,14 +59,14 @@ public class User {
 //  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date birthdayDate;
 
-  @NotEmpty
-  private String country;
+  @NotNull
+  private Country country;
 
-  public String getCountry() {
+  public Country getCountry() {
     return country;
   }
 
-  public void setCountry(String country) {
+  public void setCountry(Country country) {
     this.country = country;
   }
 

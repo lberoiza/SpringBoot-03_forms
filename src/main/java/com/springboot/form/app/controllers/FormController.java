@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.springboot.form.app.editors.CapitalizeTextEditor;
+import com.springboot.form.app.editors.CountryPropertyEditor;
+import com.springboot.form.app.models.Country;
 import com.springboot.form.app.models.User;
+import com.springboot.form.app.services.ICountryService;
 import com.springboot.form.app.validations.UserValidator;
 
 import jakarta.validation.Valid;
@@ -39,6 +42,12 @@ public class FormController {
   @Autowired
   private CapitalizeTextEditor capitalizeTextEditor;
 
+  @Autowired
+  private CountryPropertyEditor countryPropertyEditor;
+
+  @Autowired
+  private ICountryService<Country> countryService;
+
   @InitBinder
   public void initBinder(WebDataBinder binder) {
     // agrega un nuevo validador al stack de validadores que hay
@@ -55,18 +64,14 @@ public class FormController {
 
     binder.registerCustomEditor(String.class, "name", capitalizeTextEditor);
     binder.registerCustomEditor(String.class, "surname", capitalizeTextEditor);
+
+    // registrando Pais en el objeto User
+    binder.registerCustomEditor(Country.class, "country", countryPropertyEditor);
   }
 
-  @ModelAttribute("countriesMap")
-  public Map<String, String> getCountriesMap() {
-    Map<String, String> countriesMap = new HashMap<>();
-    countriesMap.put("CL", "Chile");
-    countriesMap.put("DE", "Germany");
-    countriesMap.put("ES", "Spain");
-    countriesMap.put("IT", "Italia");
-    countriesMap.put("FR", "French");
-    countriesMap.put("AR", "Argentina");
-    return countriesMap;
+  @ModelAttribute("countries")
+  public List<Country> getCountriesMap() {
+    return countryService.getList();
   }
 
   @GetMapping("/form")
