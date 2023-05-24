@@ -61,7 +61,7 @@
 		<label for="country">Date of Birthday</label> <br />
 		 <select id="country" th:field=*{country}>
 		 <option value="">--Select Country--</option>
-		 <option th:each="country: ${countries}" th:text=${country} th:value=${country}></option>
+		 <option th:each="country: ${countriesMap.entrySet()}" th:text=${country.value} th:value=${country.key}></option>
 		</select>
 		<div th:if="${#fields.hasErrors('country')}" th:errors="*{country}"
 			style="color: red"></div>

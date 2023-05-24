@@ -3,7 +3,9 @@ package com.springboot.form.app.controllers;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -55,9 +57,16 @@ public class FormController {
     binder.registerCustomEditor(String.class, "surname", capitalizeTextEditor);
   }
 
-  @ModelAttribute("countries")
-  public List<String> getCountries() {
-    return Arrays.asList("Chile", "Germany", "Spain", "Italia", "French", "Argentina");
+  @ModelAttribute("countriesMap")
+  public Map<String, String> getCountriesMap() {
+    Map<String, String> countriesMap = new HashMap<>();
+    countriesMap.put("CL", "Chile");
+    countriesMap.put("DE", "Germany");
+    countriesMap.put("ES", "Spain");
+    countriesMap.put("IT", "Italia");
+    countriesMap.put("FR", "French");
+    countriesMap.put("AR", "Argentina");
+    return countriesMap;
   }
 
   @GetMapping("/form")
