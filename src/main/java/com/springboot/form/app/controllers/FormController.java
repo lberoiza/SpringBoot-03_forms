@@ -1,6 +1,7 @@
 package com.springboot.form.app.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -41,13 +42,13 @@ public class FormController {
 
   @Autowired
   private CapitalizeTextEditor capitalizeTextEditor;
-  
+
   @Autowired
   private CountryPropertyEditor countryPropertyEditor;
 
   @Autowired
   private RolePropertyEditor rolePropertyEditor;
-  
+
   @Autowired
   private ICountryService<Country> countryService;
 
@@ -73,10 +74,10 @@ public class FormController {
 
     // registrando Pais en el objeto User
     binder.registerCustomEditor(Country.class, "country", countryPropertyEditor);
-    
+
     binder.registerCustomEditor(Role.class, "roles", rolePropertyEditor);
   }
-  
+
   @ModelAttribute("roles")
   public List<Role> getRolles() {
     return roleService.getList();
@@ -85,6 +86,11 @@ public class FormController {
   @ModelAttribute("countries")
   public List<Country> getCountries() {
     return countryService.getList();
+  }
+
+  @ModelAttribute("gender")
+  public List<String> getgenderList() {
+    return Arrays.asList("Man", "Woman");
   }
 
   @GetMapping("/form")

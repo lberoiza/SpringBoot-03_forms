@@ -16,6 +16,15 @@
 	</div>
 
 	<div class="form-group">
+		<div class="radiobutton-field" th:each="g: ${gender}">
+			<input type="radio" th:field="*{gender}" th:value=${g} /> <label
+				th:text=${g} th:for="${#ids.prev('gender')}"></label>
+		</div>
+		<div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"
+			style="color: red"></div>
+	</div>
+
+	<div class="form-group">
 		<label for="name">Name</label> <br /> <input type="text" id="name"
 			th:field=*{name} />
 		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
