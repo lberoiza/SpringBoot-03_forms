@@ -102,6 +102,8 @@ public class FormController {
     user.setSurname("Parker");
     user.setActive(true);
     user.setHiddenValue("321456789");
+    user.setCountry(new Country(1, "CL", "Chile"));
+    user.setRoles(Arrays.asList(new Role(3, "User", "ROLE_USER")));
     model.addAttribute("user", user);
     return "form/show_form";
 

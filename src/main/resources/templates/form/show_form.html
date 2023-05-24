@@ -91,7 +91,8 @@
 		<h3>Select user Roles:</h3>
 		<div class="checkbox-field" th:each="role: ${roles}">
 			<input type="checkbox" th:field="*{roles}" th:value=${role.id} /> <label
-				th:for="${#ids.prev('roles')}" th:text=${role.name}></label>
+				th:for="${#ids.prev('roles')}" th:text=${role.name}
+				th:checked="${#lists.contains(user.roles, role)}"></label>
 		</div>
 		<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"
 			style="color: red"></div>

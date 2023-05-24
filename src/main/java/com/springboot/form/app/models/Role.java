@@ -1,5 +1,7 @@
 package com.springboot.form.app.models;
 
+import java.util.Objects;
+
 public class Role {
 
   private Integer id;
@@ -38,6 +40,23 @@ public class Role {
 
   public void setCode(String code) {
     this.code = code;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(code, id, name);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Role other = (Role) obj;
+    return Objects.equals(code, other.code) && Objects.equals(id, other.id) && Objects.equals(name, other.name);
   }
 
   @Override
