@@ -4,7 +4,7 @@
 <body>
 
   <section th:fragment="elapsed_time">
-    <div class="alert alert-primary" th:text="${elapsedTimeStr}"></div>
+    <div th:if="${elapsedTimeStr != null}" class="alert alert-primary" th:text="${elapsedTimeStr}"></div>
   </section>
 
 </body>
