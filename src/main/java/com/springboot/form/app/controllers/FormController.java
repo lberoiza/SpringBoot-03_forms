@@ -96,7 +96,6 @@ public class FormController {
 
   @GetMapping("/form")
   public String showForm(Model model) {
-    model.addAttribute("title", "Create new User");
     User user = new User();
     user.setId("15.570.392-k");
     user.setName("Peter");
@@ -105,8 +104,10 @@ public class FormController {
     user.setHiddenValue("321456789");
     user.setCountry(new Country(1, "CL", "Chile"));
     user.setRoles(Arrays.asList(new Role(3, "User", "ROLE_USER")));
+    model.addAttribute("title", "Create new User");
     model.addAttribute("user", user);
-    return "form/show_form";
+    model.addAttribute("partial", "form/show_form");
+    return "content";
 
   }
 
@@ -121,7 +122,8 @@ public class FormController {
   public String processForm(@Valid User user, BindingResult result, Model model) {
     if (result.hasErrors()) {
       model.addAttribute("title", "Error By User creation");
-      return "form/show_form";
+      model.addAttribute("partial", "form/show_form");
+      return "content";
     }
     return "redirect:/show_user";
 
@@ -136,7 +138,8 @@ public class FormController {
 
     model.addAttribute("title", "User created");
     status.setComplete();
-    return "form/show_result";
+    model.addAttribute("partial", "form/show_result");
+    return "content";
   }
 
 }
