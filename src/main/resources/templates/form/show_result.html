@@ -1,23 +1,44 @@
-<h3 th:text="${title}"></h3>
 
-<h4>User:</h4>
-<ul>
-	<li><span>Id: </span><span th:text="${user.id}"></span></li>
-	<li><span>Name: </span><span th:text="${user.name}"></span></li>
-	<li><span>Surname: </span><span th:text="${user.surname}"></span></li>
-	<li><span>Username: </span><span th:text="${user.username}"></span></li>
-	<li><span>password: </span><span th:text="${user.password}"></span></li>
-	<li><span>Email: </span><span th:text="${user.email}"></span></li>
-	<li><span>CountNr: </span><span th:text="${user.count}"></span></li>
-	<li><span>Date of Birthday: </span><span
-		th:text="${#dates.format(user.birthdayDate, 'dd.MM.yyyy')}"></span></li>
-	<li><span>Country: </span><span th:text="${user.country}"></span></li>
-	<li><span>Is user active: </span><span th:text="${user.active}"></span></li>
-	<li><span>gender: </span><span th:text="${user.gender}"></span></li>
-	<li><span>Hidden Value: </span><span th:text="${user.hiddenValue}"></span></li>
-</ul>
+<section class="user-created container">
+	<h3 th:text="${title}"></h3>
 
-<h4>Roles:</h4>
-<ul>
-	<li th:each="role: ${user.roles}" th:text=${role}></li>
-</ul>
+	<div class="user-info row mb-3">
+		<ul class="list-group ">
+			<li class="list-group-item active">User Info</li>
+			<li class="list-group-item"><span>Id: </span><span
+				th:text="${user.id}"></span></li>
+			<li class="list-group-item"><span>Name: </span><span
+				th:text="${user.name}"></span></li>
+			<li class="list-group-item"><span>Surname: </span><span
+				th:text="${user.surname}"></span></li>
+			<li class="list-group-item"><span>Username: </span><span
+				th:text="${user.username}"></span></li>
+			<li class="list-group-item"><span>password: </span><span
+				th:text="${user.password}"></span></li>
+			<li class="list-group-item"><span>Email: </span><span
+				th:text="${user.email}"></span></li>
+			<li class="list-group-item"><span>CountNr: </span><span
+				th:text="${user.count}"></span></li>
+			<li class="list-group-item"><span>Date of Birthday: </span><span
+				th:text="${#dates.format(user.birthdayDate, 'dd.MM.yyyy')}"></span></li>
+			<li class="list-group-item"><span>Country: </span><span
+				th:text="${user.country}"></span></li>
+			<li class="list-group-item"><span>Is user active: </span><span
+				th:text="${user.active}"></span></li>
+			<li class="list-group-item"><span>gender: </span><span
+				th:text="${user.gender}"></span></li>
+			<li class="list-group-item"><span>Hidden Value: </span><span
+				th:text="${user.hiddenValue}"></span></li>
+		</ul>
+	</div>
+
+
+	<div class="user-roles row">
+		<ul class="list-group">
+			<li class="list-group-item active">Roles</li>
+			<li class="list-group-item" th:each="role: ${user.roles}"
+				th:text=${role}></li>
+		</ul>
+	</div>
+
+</section>
