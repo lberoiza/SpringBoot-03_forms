@@ -22,17 +22,21 @@ public class ElapsedTimeInterceptor implements HandlerInterceptor {
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     logger.info("ElapsedTimeInterceptor: preHandle() getting in ...");
-    
+
+    if (request.getMethod().equalsIgnoreCase("post")) {
+      return true;
+    }
+
     if (handler instanceof HandlerMethod) {
       HandlerMethod hMethod = (HandlerMethod) handler;
       logger.info(String.format("Calling Method '%s'", hMethod.getMethod().getName()));
     }
-    
+
     long startTime = System.currentTimeMillis();
     request.setAttribute("startTime", startTime);
 
     Random random = new Random();
-    Integer delay = random.nextInt(500); // Delay 500 miliseconds
+    Integer delay = random.nextInt(100); // Delay 100 milliseconds
     Thread.sleep(delay);
     return true;
   }
@@ -42,10 +46,15 @@ public class ElapsedTimeInterceptor implements HandlerInterceptor {
       ModelAndView modelAndView) throws Exception {
 
     long endTime = System.currentTimeMillis();
-    long startTime = (Long) request.getAttribute("startTime");
-    long elapsedTime = endTime - startTime;
+    Object startTimeObj = request.getAttribute("startTime");
+    Long elapsedTime = null;
+    String elapsedTimeStr = null;
 
-    String elapsedTimeStr = String.format("Elapsed Time: %d miliseconds", elapsedTime);
+    if (startTimeObj != null) {
+      elapsedTime = endTime - (Long) startTimeObj;
+      elapsedTimeStr = String.format("Elapsed Time: %d miliseconds", elapsedTime);
+    }
+
     if (handler instanceof HandlerMethod && modelAndView != null) {
       modelAndView.addObject("elapsedTime", elapsedTime);
       modelAndView.addObject("elapsedTimeStr", elapsedTimeStr);

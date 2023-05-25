@@ -17,10 +17,10 @@ public class McvConfig implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     // Se llamará en todas las rutas a no ser que se personalice
-    registry.addInterceptor(elapsedTimeInterceptor);
+//    registry.addInterceptor(elapsedTimeInterceptor);
     
     // personalizacion, solo para la ruta form
-    // registry.addInterceptor(elapsedTimeInterceptor).addPathPatterns("/form/**");
+     registry.addInterceptor(elapsedTimeInterceptor).addPathPatterns("/form/**");
     
   }
 
